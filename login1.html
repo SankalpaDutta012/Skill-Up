@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SkillUp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <section class="form-section">
+            <div class="form-card">
+                <h1 class="main-heading pulse">SKILLUP</h1> <h2 class="form-title">
+                    <i class="fas fa-sign-in-alt floating"></i>
+                    Login / Sign Up
+                </h2>
+                <form id="login-form" class="career-form">
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Login <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <p class="signup-text">
+                        Don't have an account? <a href="#" id="signup-link">Sign Up</a>
+                    </p>
+                </form>
+
+                <form id="signup-form" class="career-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-number"><i class="fas fa-phone"></i> Contact Number</label>
+                        <input type="tel" id="contact-number" name="contact_number" placeholder="Enter your contact number" required>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="resume"><i class="fas fa-file-upload"></i> Upload Resume</label>
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                    </div> -->
+
+                    <button type="submit" class="submit-btn">
+                        Sign Up <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <p class="login-text">
+                        Already have an account? <a href="#" id="login-link">Login</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>
+            <i class="fas fa-heartbeat pulse" style="color: #ff3860"></i>
+            © 2023 SkillUp. Empowering career growth through AI-powered insights.
+        </p>
+    </footer>
+
+    <script>
+        // Toggle between login and signup forms
+        document.getElementById('signup-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        });
+
+        document.getElementById('login-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        });
+
+        // Handle login form submission
+        document.getElementById('login-form').onsubmit = async function (e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button');
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Logging in...`;
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+
+                // Call the backend login endpoint
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Save the token in localStorage (or sessionStorage)
+                    localStorage.setItem('token', result.token);
+                    window.location.href = 'http://127.0.0.1:5000/'; // Redirect to the main page
+                } else {
+                    alert(result.message || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while logging in.');
+            } finally {
+                submitBtn.innerHTML = `Login <i class="fas fa-arrow-right"></i>`;
+                submitBtn.disabled = false;
+            }
+        };
+
+        // Handle signup form submission
+        document.getElementById('signup-form').onsubmit = async function (e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button');
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Signing up...`;
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(e.target);
+
+                // Validate password match
+                const password = formData.get('password');
+                const confirmPassword = formData.get('confirm_password');
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match.');
+                    return;
+                }
+
+                // Call the backend signup endpoint
+                const response = await fetch('http://localhost:5000/signup', {
+                    method: 'POST',
+                    body: formData, // Send FormData directly for file upload
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Save the token in localStorage (or sessionStorage)
+                    localStorage.setItem('token', result.token);
+                    window.location.href = 'http://127.0.0.1:5000/'; // Redirect to the main page
+                } else {
+                    alert(result.message || 'Signup failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while signing up.');
+            } finally {
+                submitBtn.innerHTML = `Sign Up <i class="fas fa-arrow-right"></i>`;
+                submitBtn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>
