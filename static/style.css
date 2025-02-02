@@ -1,4 +1,14 @@
 /* General Styles */
+
+:root {
+    --primary-color: #2A2E45;
+    --accent-color: #3B8EA5;
+    --light-bg: #F9F9F9;
+    --course-color: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    --video-color: linear-gradient(135deg, #E91E63 0%, #c2185b 100%);
+    --job-color: linear-gradient(135deg, #673AB7 0%, #512da8 100%);
+    --roadmap-color: linear-gradient(135deg, #FFC107 0%, #FFA000 100%); /* Added roadmap color */
+}
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -368,94 +378,102 @@ body {
 
 /* Results Section Styles */
 .results-section {
-    padding: 40px 0;
+    margin-top: 3rem;
 }
 
 .results-card {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1s ease-in-out;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    padding: 2rem;
 }
 
 .results-title {
-    text-align: center;
-    margin-bottom: 30px;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .recommendation-category {
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
 }
 
 .category-header {
-    background-color: #f0f0f0;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 1.5rem;
+    color: white;
     display: flex;
     align-items: center;
-    transition: background-color 0.3s ease;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .category-header:hover {
-    background-color: #e0e0e0;
+    transform: scale(1.02);
 }
 
-.category-header i {
-    margin-right: 10px;
-}
+.course-bg { background: var(--course-color); }
+.video-bg { background: var(--video-color); }
+.job-bg { background: var(--job-color); }
+.roadmap-bg { background: var(--roadmap-color); } /* Road map header background */
 
 .recommendation-list {
+    padding: 1.5rem;
     list-style: none;
-    padding: 0;
+}
+
+.recommendation-list li {
+    margin: 0.75rem 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInRight 0.5s ease forwards;
 }
 
 .resource-link {
     display: flex;
     align-items: center;
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
     text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    color: inherit;
 }
 
 .resource-link:hover {
-    background-color: #e0e0e0;
     transform: translateX(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .resource-link i {
-    margin-right: 15px;
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
 }
 
-.resource-link strong {
-    flex-grow: 1;
-}
-
-.resource-link .platform, .resource-link .company {
-    font-size: 0.9em;
+.platform, .company {
+    display: block;
+    font-size: 0.9rem;
     color: #666;
+    margin-top: 0.3rem;
 }
 
 .roadmap-step {
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.roadmap-step:hover {
-    background-color: #e0e0e0;
-    transform: translateX(10px);
-}
-
-.roadmap-step strong {
-    display: block;
-    margin-bottom: 5px;
+    padding: 1.25rem;
+     border-radius: 8px;
+     background: #f8f8f8;
+     box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 0.5rem;
+       border: 1px solid #ddd;
 }
 
 /* Testimonials Section Styles */
@@ -532,19 +550,4 @@ body {
     50% {
         transform: scale(1.1);
     }
-}
-.course-bg {
-    background-color: #e6f0ff; /* Light blue */
-}
-
-.video-bg {
-    background-color: #e6ffe6; /* Light green */
-}
-
-.job-bg {
-    background-color: #fff2e6; /* Light orange */
-}
-
-.roadmap-bg {
-    background-color: #f5e6ff; /* Light purple */
 }

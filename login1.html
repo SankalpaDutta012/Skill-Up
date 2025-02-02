@@ -4,72 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SkillUp</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <main class="container">
         <section class="form-section">
+            <h1 class="main-heading pulse">SKILLUP</h1>
             <div class="form-card">
-                <h1 class="main-heading pulse">SKILLUP</h1> <h2 class="form-title">
-                    <i class="fas fa-sign-in-alt floating"></i>
-                    Login / Sign Up
-                </h2>
-                <form id="login-form" class="career-form">
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="container" id="container">
+                    <div class="form-container sign-up-container">
+                        <form id="signup-form" class="career-form">
+                            <h2 class="form-title">Create Account</h2>
+                            <div class="form-group">
+                                <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
+                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('signup-password')"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('confirm-password')"></i>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group remember-forgot">
+                                <label class="remember-me">
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                                <a href="#" class="forgot-password">Forgot Password?</a>
+                            </div> -->
+            
+
+                            <!-- <div class="form-group">
+                                <label for="contact-number"><i class="fas fa-phone"></i> Contact Number</label>
+                                <input type="tel" id="contact-number" name="contact_number" placeholder="Enter your contact number" required>
+                            </div> -->
+
+                            <button type="submit" class="submit-btn">
+                                Sign Up <i class="fas fa-arrow-right"></i>
+                            </button>
+
+                        </form>
                     </div>
+                    <div class="form-container sign-in-container">
+                        <form id="login-form" class="career-form">
+                            <h2 class="form-title">Sign in</h2>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="password"><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <div class="form-group">
+                                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                Login <i class="fas fa-arrow-right"></i>
+                            </button>
+
+                        </form>
                     </div>
-
-                    <button type="submit" class="submit-btn">
-                        Login <i class="fas fa-arrow-right"></i>
-                    </button>
-
-                    <p class="signup-text">
-                        Don't have an account? <a href="#" id="signup-link">Sign Up</a>
-                    </p>
-                </form>
-
-                <form id="signup-form" class="career-form" style="display: none;">
-                    <div class="form-group">
-                        <label for="signup-email"><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                    <div class="overlay-container">
+                        <div class="overlay">
+                            <div class="overlay-panel overlay-left">
+                                <h1>Welcome Back!</h1>
+                                <p>To keep connected with us please login with your personal info</p>
+                                <button class="ghost" id="signIn">Sign In</button>
+                            </div>
+                            <div class="overlay-panel overlay-right">
+                                <h1>Hello, Friend!</h1>
+                                <p>Enter your personal details and start journey with us</p>
+                                <button class="ghost" id="signUp">Sign Up</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
-                        <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
-                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contact-number"><i class="fas fa-phone"></i> Contact Number</label>
-                        <input type="tel" id="contact-number" name="contact_number" placeholder="Enter your contact number" required>
-                    </div>
-
-                    <!-- <div class="form-group">
-                        <label for="resume"><i class="fas fa-file-upload"></i> Upload Resume</label>
-                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-                    </div> -->
-
-                    <button type="submit" class="submit-btn">
-                        Sign Up <i class="fas fa-arrow-right"></i>
-                    </button>
-
-                    <p class="login-text">
-                        Already have an account? <a href="#" id="login-link">Login</a>
-                    </p>
-                </form>
+                </div>
             </div>
         </section>
     </main>
@@ -82,23 +106,33 @@
     </footer>
 
     <script>
-        // Toggle between login and signup forms
-        document.getElementById('signup-link').addEventListener('click', function (e) {
-            e.preventDefault();
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('signup-form').style.display = 'block';
-        });
+         // Enhanced Toggle Password Visibility
+         function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target; // Get the clicked icon
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
 
-        document.getElementById('login-link').addEventListener('click', function (e) {
-            e.preventDefault();
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
+        // Smooth Form Switching
+        document.querySelectorAll('#signup-link, #login-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('.form-card').classList.toggle('active');
+            });
         });
 
         // Handle login form submission
         document.getElementById('login-form').onsubmit = async function (e) {
             e.preventDefault();
-            const submitBtn = e.target.querySelector('button');
+            const submitBtn = e.target.querySelector('.submit-btn');
             submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Logging in...`;
             submitBtn.disabled = true;
 
@@ -134,7 +168,7 @@
         // Handle signup form submission
         document.getElementById('signup-form').onsubmit = async function (e) {
             e.preventDefault();
-            const submitBtn = e.target.querySelector('button');
+            const submitBtn = e.target.querySelector('.submit-btn');
             submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Signing up...`;
             submitBtn.disabled = true;
 
@@ -172,6 +206,30 @@
                 submitBtn.disabled = false;
             }
         };
+
+        // Add input field interactions
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('active');
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('active');
+            });
+        });
+
+        // Toggle between login and signup forms
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
     </script>
 </body>
 </html>
