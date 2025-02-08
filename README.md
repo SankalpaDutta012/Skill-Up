@@ -1,1 +1,3 @@
+INTRODUCTION:
+
 In today’s life, we see that many individuals want to become successful through the help of projects or freelancing. But many of those individuals lack those skills, which are needed the most. Due to these, they lost their golden opportunities. In this case, SkillSphere is an outstanding platform designed to help those individuals and enhance their skills to fill up those missing skill gaps. With the help of this platform, we plan to provide highly customizable and personalized educational experiences with the help of real-user data. Our methodology is founded on key advancements and user-focused processes, ensuring each individual user receives the most relevant and effective learning solutions.
